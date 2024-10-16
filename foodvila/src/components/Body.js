@@ -2,18 +2,18 @@ import { useState ,useEffect} from 'react';
 import RestrauntCard from './RestrauntCard';
 import { restaurantList } from './config';
 
+    
+const filterData=(searchInput,restaurants)=>{
+  return restaurants.filter((restaurant)=>
+    restaurant.info.name.includes(searchInput)
+  );
+}
 
 
 const Body=()=>{
     const [searchInput, setSearchInput] = useState("");
     const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-    const [allrestaurants, setAllRestaurants] = useState([]);
-    
-    const filterData=(searchInput,restaurants)=>{
-      return restaurants.filter((restaurant)=>
-        restaurant.info.name.includes(searchInput)
-      );
-    }
+    const [allrestaurants, setAllRestaurants] = useState();
 
 
     useEffect(() => {
@@ -32,6 +32,8 @@ const Body=()=>{
     }
 
 
+    if(!allrestaurants) return null;
+    
     return(
         <>
         <div className='search-container'>
